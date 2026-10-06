@@ -506,25 +506,139 @@ footer {
 
 <!-- ================= REASONS ================= -->
 
-<section class="reasons">
+<section class="letter">
+
+    <div class="small-text">SOMETHING FROM MY HEART</div>
 
     <h2 class="section-title">
-        Why I <span>Love You</span> ❤️
+        A Letter <span>For You</span> 💌
     </h2>
 
-    <div class="reason-box">
-
-        <div id="reason">
-            Click the button to discover one...
-        </div>
-
-        <button class="reason-btn" onclick="nextReason()">
-            Tell Me Why ❤️
-        </button>
-
+    <div class="letter-box">
+        <div id="typing"></div>
+        <span class="cursor">|</span>
     </div>
 
 </section>
+
+<style>
+.letter {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.small-text {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #ff8ac5;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: clamp(35px, 7vw, 65px);
+    margin-bottom: 40px;
+    color: white;
+}
+
+.section-title span {
+    color: #ff579e;
+}
+
+.letter-box {
+    width: min(750px, 95%);
+    padding: 45px 35px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 50px rgba(255,50,130,0.08);
+    text-align: left;
+}
+
+#typing {
+    color: #eee;
+    font-size: 19px;
+    line-height: 2;
+    white-space: pre-line;
+}
+
+.cursor {
+    color: #ff579e;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@media(max-width:600px) {
+    .letter {
+        padding: 50px 15px;
+    }
+
+    .letter-box {
+        padding: 30px 22px;
+    }
+
+    #typing {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+}
+</style>
+
+<script>
+
+const letterText = `Dear My wifey ❤️,
+
+I don't know exactly when you became such an important part of my life, but somewhere between our conversations, silly moments, little fights, endless laughs, and those beautiful memories, you became someone I never want to lose.
+
+You make my ordinary days feel special just by being there. I love the way you understand me, the way you make me smile, and even the little things you do without realizing how much they mean to me.
+
+I may not always be perfect at expressing my feelings, but one thing I want you to always remember is that you are truly special to me.
+
+If I could choose one person to share all my beautiful moments, my dreams, my happiness, and even my difficult days with, I would choose you every single time.
+
+With all my heart,
+Your Meetu ❤️`;
+
+let typingIndex = 0;
+
+function typeLetter() {
+
+    if (typingIndex < letterText.length) {
+
+        document.getElementById("typing").innerHTML +=
+            letterText.charAt(typingIndex);
+
+        typingIndex++;
+
+        setTimeout(typeLetter, 35);
+    }
+}
+
+const letterSection = document.querySelector(".letter");
+
+const letterObserver = new IntersectionObserver((entries) => {
+
+    if (entries[0].isIntersecting && typingIndex === 0) {
+        typeLetter();
+    }
+
+}, {
+    threshold: 0.3
+});
+
+letterObserver.observe(letterSection);
+
+</script>
 
 
 <!-- ================= LETTER ================= -->
